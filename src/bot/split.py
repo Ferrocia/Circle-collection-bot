@@ -20,6 +20,6 @@ def split_video_to_frames(video_data, fps=5):
         if i % frame_interval == 0:
             frame_rgb = frame.to_image().convert('RGB')
             frames.append(frame_rgb)
-    
+
     container.close()
     return frames

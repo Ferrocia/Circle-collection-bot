@@ -4,7 +4,7 @@ from aiogram.utils import executor
 from aiogram.types import ContentType
 from dotenv import load_dotenv
 from io import BytesIO
-from predict import predictImmage, add_points
+from predict import predictImage, add_points
 from split import split_video_to_frames
 
 load_dotenv()
@@ -34,12 +34,12 @@ async def handle_video_note(message: types.Message):
         video_data = BytesIO()
 
         await bot.download_file(file_path, video_data)
-
+        print(file_path)
         video_data.seek(0)
         frames = split_video_to_frames(video_data)
-        predic = predictImmage(frames)
+        predic = predictImage(frames)
         points = await add_points(chat_id, predic)
-        await bot.send_message(chat_id, f'Smoking scors {points}')
+        await bot.send_message(chat_id, f'Cat scores {points}')
         print(f"Кружок сохранён в переменную, размер видео {video_data.getbuffer().nbytes} байт.")
 
 
